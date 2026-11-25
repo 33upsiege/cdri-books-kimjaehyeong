@@ -61,6 +61,9 @@ function Catalogue() {
     const favoriteIds = new Set(favorites.map(bookId));
 
     const runSearch = (next: Search) => {
+        if (searchPage === 1 && result.isError && search?.query === next.query && search.target === next.target) {
+            void result.refetch();
+        }
         setSearch(next);
         setSearchPage(1);
         setExpanded(null);
